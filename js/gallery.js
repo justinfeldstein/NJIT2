@@ -34,17 +34,28 @@ function animate() {
 
 function swapPhoto() {
 	//Add code here to access the #slideShow element.
-	
+	if (mCurrentIndex >= mImages.length) {
+		mCurrentIndex = 0;
+	}
+	if (mCurrentIndex < 0) {
+   	 	mCurrentIndex = mImages.length-1;
+  }
 	//Access the img element and replace its source
 	//with a new image from your images array which is loaded 
 	//from the JSON string
-	console.log('swap photo');
 
 	document.getElementById('photo').src = mImages[mCurrentIndex].img;
 	var location = document.getElementsByClassName("location");
-	location[0].innerHTML = 
+	loc[0].innerHTML = 'Location: ' + mImages[mCurrentIndex].location;
+
 	var description = document.getElementsByClassName("description");
+	des[0].innerHTML = "Description: " + mImages[mCurrentIndex].location;
+
 	var data = document.getElementsByClassName("date");
+	dt[0].innerHTML = "Date: " + mImages[mCurrentIndex].location;
+
+  	mLastFrameTime = 0;
+	mCurrentIndex++;
 }
 
 // Counter for the mImages array
@@ -69,6 +80,7 @@ function WhosJason() {
 	mRequest.onreadystatechange = function () {
 		console.log(object);
 		if (this.readyState == 4 && this.status == 200) {
+			
 			mJson = JSON.parse(mRequest.responseText);
 			iterateJSON(mJSON);
 		}
@@ -77,6 +89,16 @@ function WhosJason() {
 	mRequest.send();
 }
 
+
+function iterateJSON(mJson) {
+	for (x = 0; x < mJson.images.length; x++) {
+		mImages[x] = new GalleryImage();
+		mImages[x].location = mJson.images[x].imgLocation;
+		mImages[x].date = mJson.images[x].date;
+		mImages[x].description = mJson.images[x].description;
+		mImages[x].img = mJson.images[x].imgPath;
+	}
+}
 
 
 
@@ -94,6 +116,7 @@ $(document).ready(function () {
 
 	// This initially hides the photos' metadata information
 	$('.details').eq(0).hide();
+	WhosJason()
 
 });
 
