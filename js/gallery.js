@@ -33,6 +33,7 @@ function animate() {
 /************* DO NOT TOUCH CODE ABOVE THIS LINE ***************/
 
 function swapPhoto() {
+	mCurrentIndex++;
 	//Add code here to access the #slideShow element.
 	if (mCurrentIndex >= mImages.length) {
 		mCurrentIndex = 0;
@@ -55,9 +56,10 @@ function swapPhoto() {
 	dt[0].innerHTML = "Date: " + mImages[mCurrentIndex].date;
 
   	mLastFrameTime = 0;
-	mCurrentIndex++;
+	
 }
 function swapBack() {
+	mCurrentIndex--;
 	//Add code here to access the #slideShow element.
 	if (mCurrentIndex >= mImages.length) {
 		mCurrentIndex = 0;
@@ -80,7 +82,7 @@ function swapBack() {
 	dt[0].innerHTML = "Date: " + mImages[mCurrentIndex].date;
 
   	mLastFrameTime = 0;
-	mCurrentIndex--;
+	
 }
 
 // Counter for the mImages array
@@ -97,7 +99,7 @@ var mJson;
 
 // URL for the JSON to load by default
 // Some options for you are: images.json, images.short.json; you will need to create your own extra.json later
-var mUrl = "https://api.npoint.io/c297a7b9ee0666a7e90c";
+var mUrl = "https://api.npoint.io/db869c162462604912d6";
 
 
 //constructor for pulling JSON File
